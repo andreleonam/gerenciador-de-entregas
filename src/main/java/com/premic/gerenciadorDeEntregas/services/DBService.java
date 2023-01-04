@@ -2,9 +2,11 @@ package com.premic.gerenciadorDeEntregas.services;
 
 import com.premic.gerenciadorDeEntregas.entities.Category;
 import com.premic.gerenciadorDeEntregas.entities.PublicPlace;
+import com.premic.gerenciadorDeEntregas.entities.State;
 import com.premic.gerenciadorDeEntregas.entities.Unit;
 import com.premic.gerenciadorDeEntregas.repositories.CategoryRepository;
 import com.premic.gerenciadorDeEntregas.repositories.PublicPlaceRepository;
+import com.premic.gerenciadorDeEntregas.repositories.StateRepository;
 import com.premic.gerenciadorDeEntregas.repositories.UnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,9 @@ public class DBService {
 
     @Autowired
     private PublicPlaceRepository publicPlaceRepository;
+
+    @Autowired
+    private StateRepository stateRepository;
 
     public void instantiateTestDatabase() {
 
@@ -254,5 +259,8 @@ public class DBService {
         publicPlaceRepository.saveAll(Arrays.asList(pp001, pp002, pp003, pp004, pp005, pp006, pp007, pp008, pp009, pp010, pp011, pp012, pp013, pp014, pp015, pp016, pp017, pp018, pp019, pp020, pp021, pp022, pp023, pp024, pp025, pp026, pp027, pp028, pp029, pp030, pp031, pp032, pp033, pp034, pp035, pp036, pp037, pp038, pp039, pp040, pp041, pp042, pp043, pp044, pp045, pp046, pp047, pp048, pp049, pp050, pp051, pp052, pp053, pp054, pp055, pp056, pp057, pp058, pp059, pp060, pp061, pp062, pp063, pp064, pp065, pp066, pp067, pp068, pp069, pp070, pp071, pp072, pp073, pp074, pp075, pp076, pp077, pp078, pp079, pp080, pp081, pp082, pp083, pp084, pp085, pp086, pp087, pp088, pp089, pp090, pp091, pp092, pp093, pp094, pp095, pp096, pp097, pp098, pp099, pp100, pp101, pp102, pp103, pp104, pp105, pp106, pp107, pp108, pp109, pp110, pp111, pp112, pp113, pp114, pp115, pp116, pp117, pp118, pp119, pp120, pp121, pp122, pp123, pp124, pp125, pp126, pp127, pp128, pp129, pp130, pp131, pp132, pp133, pp134, pp135, pp136, pp137, pp138, pp139, pp140, pp141, pp142, pp143, pp144, pp145, pp146, pp147, pp148, pp149, pp150, pp151, pp152, pp153, pp154, pp155, pp156, pp157, pp158, pp159, pp160, pp161, pp162, pp163, pp164, pp165, pp166, pp167, pp168, pp169, pp170, pp171, pp172, pp173, pp174, pp175, pp176, pp177, pp178));
 
 
+        State st01 = new State(null, "SE", "Sergipe");
+        State st02 = new State(null, "AL", "Alagoas");
+        stateRepository.saveAll(Arrays.asList(st01, st02));
     }
 }
