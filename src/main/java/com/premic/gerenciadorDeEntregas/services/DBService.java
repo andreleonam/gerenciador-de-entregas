@@ -15,7 +15,7 @@ public class DBService {
 
     public void instantiateTestDatabase() {
 
-        Category cat1 = new Category(null, "TRELICA");
+        Category cat1 = new Category(null, "TRELIÇA");
         Category cat2 = new Category(null, "ESTACA");
         Category cat3 = new Category(null, "TUBO");
         Category cat4 = new Category(null, "PISO");

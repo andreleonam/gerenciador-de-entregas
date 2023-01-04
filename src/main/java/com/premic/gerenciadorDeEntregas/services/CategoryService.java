@@ -5,7 +5,6 @@ import com.premic.gerenciadorDeEntregas.entities.Category;
 import com.premic.gerenciadorDeEntregas.repositories.CategoryRepository;
 import com.premic.gerenciadorDeEntregas.services.exceptions.DataIntegrityException;
 import com.premic.gerenciadorDeEntregas.services.exceptions.ResourceNotFoundException;
-import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -15,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
