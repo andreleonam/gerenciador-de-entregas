@@ -63,13 +63,13 @@ public class CategoryService {
 
     }
 
-    public Page<Category> findPage(Integer page, Integer linesPerPage, String direction, String orderBy) {
+    public Page<Category> findPage(String name, Integer page, Integer linesPerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
-        return repository.findAll(pageRequest);
+        return repository.findByNameContaining(name, pageRequest);
     }
 
     public Category fromDto(CategoryDTO objDto) {
-        return new Category(objDto.getId(), objDto.getNome());
+        return new Category(objDto.getId(), objDto.getName());
     }
 
 }
