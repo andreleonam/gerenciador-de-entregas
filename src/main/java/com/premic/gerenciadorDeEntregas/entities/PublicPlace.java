@@ -1,14 +1,22 @@
 package com.premic.gerenciadorDeEntregas.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_publicplace")
 public class PublicPlace implements Serializable {
     private static final long serialVersionUID = 1L;
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String acronym;
+
+    @Column(unique = true)
     private String name;
 
     public PublicPlace() {
