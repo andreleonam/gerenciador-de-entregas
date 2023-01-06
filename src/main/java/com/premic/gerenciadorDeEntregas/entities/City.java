@@ -1,40 +1,32 @@
 package com.premic.gerenciadorDeEntregas.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "tb_state")
-public class State implements Serializable {
+@Table(name = "tb_city")
+public class City implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @Column(unique = true)
-    private String acronym;
-
-    @Column(unique = true)
     private String name;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "state")
-    private Set<City> cities = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "state_id")
+    private State state;
 
 
-    public State() {
+    public City() {
     }
 
-    public State(Long id, String acronym, String name) {
+    public City(Long id, String name, State state) {
         Id = id;
-        this.acronym = acronym;
         this.name = name;
+        this.state = state;
     }
 
     public Long getId() {
@@ -45,14 +37,6 @@ public class State implements Serializable {
         Id = id;
     }
 
-    public String getAcronym() {
-        return acronym;
-    }
-
-    public void setAcronym(String acronym) {
-        this.acronym = acronym;
-    }
-
     public String getName() {
         return name;
     }
@@ -61,15 +45,19 @@ public class State implements Serializable {
         this.name = name;
     }
 
-    public Set<City> getCities() {
-        return cities;
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof State state)) return false;
-        return Objects.equals(getId(), state.getId());
+        if (!(o instanceof City city)) return false;
+        return Objects.equals(getId(), city.getId());
     }
 
     @Override

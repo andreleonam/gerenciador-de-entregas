@@ -22,8 +22,8 @@ public class DBService {
     @Autowired
     private StateRepository stateRepository;
 
-   /* @Autowired
-    private CityRepository cityRepository;*/
+    @Autowired
+    private CityRepository cityRepository;
 
     public void instantiateTestDatabase() {
 
@@ -260,9 +260,9 @@ public class DBService {
         State st02 = new State(null, "AL", "Alagoas");
         stateRepository.saveAll(Arrays.asList(st01, st02));
 
-       /* City ct01 = new City(null, "Aracaju", st01);
+        City ct01 = new City(null, "Aracaju", st01);
         City ct02 = new City(null, "Maceió", st02);
         City ct03 = new City(null, "Laranjeiras", st01);
-        cityRepository.saveAll(Arrays.asList(ct01, ct02, ct03));*/
+        cityRepository.saveAll(Arrays.asList(ct01, ct02, ct03));
     }
 }
