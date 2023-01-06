@@ -1,13 +1,7 @@
 package com.premic.gerenciadorDeEntregas.services;
 
-import com.premic.gerenciadorDeEntregas.entities.Category;
-import com.premic.gerenciadorDeEntregas.entities.PublicPlace;
-import com.premic.gerenciadorDeEntregas.entities.State;
-import com.premic.gerenciadorDeEntregas.entities.Unit;
-import com.premic.gerenciadorDeEntregas.repositories.CategoryRepository;
-import com.premic.gerenciadorDeEntregas.repositories.PublicPlaceRepository;
-import com.premic.gerenciadorDeEntregas.repositories.StateRepository;
-import com.premic.gerenciadorDeEntregas.repositories.UnitRepository;
+import com.premic.gerenciadorDeEntregas.entities.*;
+import com.premic.gerenciadorDeEntregas.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +21,9 @@ public class DBService {
 
     @Autowired
     private StateRepository stateRepository;
+
+   /* @Autowired
+    private CityRepository cityRepository;*/
 
     public void instantiateTestDatabase() {
 
@@ -262,5 +259,10 @@ public class DBService {
         State st01 = new State(null, "SE", "Sergipe");
         State st02 = new State(null, "AL", "Alagoas");
         stateRepository.saveAll(Arrays.asList(st01, st02));
+
+       /* City ct01 = new City(null, "Aracaju", st01);
+        City ct02 = new City(null, "Maceió", st02);
+        City ct03 = new City(null, "Laranjeiras", st01);
+        cityRepository.saveAll(Arrays.asList(ct01, ct02, ct03));*/
     }
 }

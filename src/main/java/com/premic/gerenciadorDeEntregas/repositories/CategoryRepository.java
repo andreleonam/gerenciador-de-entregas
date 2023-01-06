@@ -11,4 +11,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @Transactional(readOnly = true)
     Page<Category> findByNameContaining(String name, Pageable pageRequest);
 
+    @Transactional(readOnly = true)
+    Category findByName(String name);
 }

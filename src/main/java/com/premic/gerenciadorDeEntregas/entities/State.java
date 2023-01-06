@@ -1,9 +1,12 @@
 package com.premic.gerenciadorDeEntregas.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_state")
@@ -17,6 +20,7 @@ public class State implements Serializable {
     @Column(unique = true)
     private String acronym;
 
+    @Column(unique = true)
     private String name;
 
     public State() {
@@ -51,6 +55,7 @@ public class State implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
 
     @Override
     public boolean equals(Object o) {

@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.EntityNotFoundException;
@@ -34,8 +35,11 @@ public class CategoryService {
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
+    @Transactional
     public Category insert(Category obj) {
-        return repository.save(obj);
+        obj.setId(null);
+        obj = repository.save(obj);
+        return obj;
     }
 
     private void updateData(Category entity, Category obj) {
