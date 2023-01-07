@@ -1,11 +1,11 @@
 package com.premic.gerenciadorDeEntregas.services;
 
-import com.premic.gerenciadorDeEntregas.dto.CityDTO;
-import com.premic.gerenciadorDeEntregas.dto.CityNewDTO;
-import com.premic.gerenciadorDeEntregas.entities.City;
-import com.premic.gerenciadorDeEntregas.entities.State;
-import com.premic.gerenciadorDeEntregas.repositories.CityRepository;
-import com.premic.gerenciadorDeEntregas.repositories.StateRepository;
+import com.premic.gerenciadorDeEntregas.dto.CustomerDTO;
+import com.premic.gerenciadorDeEntregas.dto.CustomerNewDTO;
+import com.premic.gerenciadorDeEntregas.entities.Address;
+import com.premic.gerenciadorDeEntregas.entities.Customer;
+import com.premic.gerenciadorDeEntregas.repositories.AddressRepository;
+import com.premic.gerenciadorDeEntregas.repositories.CustomerRepository;
 import com.premic.gerenciadorDeEntregas.services.exceptions.DataIntegrityException;
 import com.premic.gerenciadorDeEntregas.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,38 +23,40 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CityService {
+public class CustomerService {
 
     @Autowired
-    private CityRepository repository;
+    private CustomerRepository repository;
 
     @Autowired
-    private StateRepository stateRepository;
+    private AddressRepository addressRepository;
 
-    public List<City> findAll() {
+
+    public List<Customer> findAll() {
         return repository.findAll();
     }
 
     @GetMapping
-    public City findById(Long id) {
-        Optional<City> obj = repository.findById(id);
+    public Customer findById(Long id) {
+        Optional<Customer> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     @Transactional
-    public City insert(City obj) {
+    public Customer insert(Customer obj) {
         obj.setId(null);
         obj = repository.save(obj);
         return obj;
     }
 
-    private void updateData(City entity, City obj) {
+    private void updateData(Customer entity, Customer obj) {
         entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
     }
 
-    public City update(Long id, City obj) {
+    public Customer update(Long id, Customer obj) {
         try {
-            City entity = repository.getReferenceById(id);
+            Customer entity = repository.getReferenceById(id);
             updateData(entity, obj);
             return repository.save(entity);
         } catch (EntityNotFoundException e) {
@@ -73,21 +75,26 @@ public class CityService {
 
     }
 
-    public Page<City> findPage(String name, Integer page, Integer linesPerPage, String direction, String orderBy) {
+    public Page<Customer> findPage(String name, Integer page, Integer linesPerPage, String direction, String orderBy) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repository.findByNameContaining(name, pageRequest);
     }
 
-    public City fromDto(CityDTO objDto) {
-        return new City(objDto.getId(), objDto.getName(), null);
+    public Customer fromDto(CustomerDTO objDto) {
+        return new Customer(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 
-    public City fromDto(CityNewDTO objDto) {
-        State state = stateRepository.getReferenceById(objDto.getStateId());
-        City city = new City(objDto.getId(), objDto.getName(), state);
-        state.getCities().add(city);
-        return city;
+    public Customer fromDto(CustomerNewDTO objDto){
+        Customer customer = new Customer(null, objDto.getName(), objDto.getEmail());
+        Address address = new Address(null, objDto.getStreet(), objDto.getNumber(), objDto.getComplement(), objDto.getDistrict(), objDto.getZipCode(), objDto.getCity(), objDto.getState(), customer);
+        customer.getAddresses().add(address);
+        customer.getPhones().add(objDto.getPhoneNumber01());
+        if (objDto.getPhoneNumber02() != null) {
+            customer.getPhones().add(objDto.getPhoneNumber02());
+        }
+        if (objDto.getPhoneNumber03() != null) {
+            customer.getPhones().add(objDto.getPhoneNumber03());
+        }
+        return customer;
     }
-
-
 }
