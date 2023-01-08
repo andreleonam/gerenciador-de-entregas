@@ -23,7 +23,11 @@ public class Product implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "id.product")
-    private final Set<ReceiptItem> items = new HashSet<>();
+    private Set<ReceiptItem> items = new HashSet<>();
+
+   /* @JsonIgnore
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> orderItems = new HashSet<>();*/
 
     public Product() {
     }
@@ -70,6 +74,19 @@ public class Product implements Serializable {
         }
         return set;
     }
+/*
+    public Set<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> set = new HashSet<>();
+        for (OrderItem obj : orderItems) {
+            set.add((obj.getOrder()));
+        }
+        return set;
+    }*/
 
     @Override
     public boolean equals(Object o) {

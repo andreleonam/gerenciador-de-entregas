@@ -1,7 +1,5 @@
 package com.premic.gerenciadorDeEntregas.repositories;
 
-import com.premic.gerenciadorDeEntregas.entities.Address;
-import com.premic.gerenciadorDeEntregas.entities.Customer;
 import com.premic.gerenciadorDeEntregas.entities.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

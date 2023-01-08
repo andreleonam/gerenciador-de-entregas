@@ -1,6 +1,5 @@
 package com.premic.gerenciadorDeEntregas.services;
 
-import com.premic.gerenciadorDeEntregas.entities.Customer;
 import com.premic.gerenciadorDeEntregas.entities.GoodsReceipt;
 import com.premic.gerenciadorDeEntregas.entities.ReceiptItem;
 import com.premic.gerenciadorDeEntregas.repositories.GoodsReceiptRepository;
@@ -42,12 +41,11 @@ public class GoodsReceiptService {
     public GoodsReceipt insert(GoodsReceipt obj) {
         obj.setId(null);
         obj.setDateReceipt(now());
-        for (ReceiptItem ri : obj.getItems()) {
-            ri.setGoodsReceipt(obj);
-
+        for (ReceiptItem items : obj.getReceiptItems()) {
+            items.setGoodsReceipt(obj);
         }
         repository.save(obj);
-        receiptItemRepository.saveAll(obj.getItems());
+        receiptItemRepository.saveAll(obj.getReceiptItems());
         return obj;
     }
 }

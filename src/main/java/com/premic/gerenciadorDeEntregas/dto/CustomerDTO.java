@@ -3,13 +3,9 @@ package com.premic.gerenciadorDeEntregas.dto;
 import com.premic.gerenciadorDeEntregas.entities.Customer;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class CustomerDTO implements Serializable {

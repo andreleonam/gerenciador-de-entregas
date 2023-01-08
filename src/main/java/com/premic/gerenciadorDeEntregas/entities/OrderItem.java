@@ -1,7 +1,7 @@
 package com.premic.gerenciadorDeEntregas.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.premic.gerenciadorDeEntregas.entities.pk.ReceiptItemPK;
+import com.premic.gerenciadorDeEntregas.entities.pk.OrderItemPK;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -10,33 +10,34 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_receipt_item")
-public class ReceiptItem implements Serializable {
+@Table(name = "tb_order_item")
+public class OrderItem implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonIgnore
     @EmbeddedId
-    private ReceiptItemPK id = new ReceiptItemPK();
+    private OrderItemPK id = new OrderItemPK();
 
     private Double amount;
 
-    public ReceiptItem() {
+    public OrderItem() {
     }
 
-    public ReceiptItem(GoodsReceipt goodsReceipt, Product product, Double amount) {
-        id.setGoodsReceipt(goodsReceipt);
+    public OrderItem(Order order, Product product, Double amount) {
+        id.setOrder(order);
         id.setProduct(product);
         this.amount = amount;
     }
 
     @JsonIgnore
-    public GoodsReceipt getGoodsReceipt() {
-        return id.getGoodsReceipt();
+    public Order getOrder() {
+        return id.getOrder();
     }
 
-    public void setGoodsReceipt(GoodsReceipt goodsReceipt) {
-        id.setGoodsReceipt(goodsReceipt);
+    public void setOrder(Order order) {
+        id.setOrder(order);
     }
+
 
     public Product getProduct() {
         return id.getProduct();
@@ -54,10 +55,11 @@ public class ReceiptItem implements Serializable {
         this.amount = amount;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ReceiptItem that)) return false;
+        if (!(o instanceof OrderItem that)) return false;
         return Objects.equals(id, that.id);
     }
 

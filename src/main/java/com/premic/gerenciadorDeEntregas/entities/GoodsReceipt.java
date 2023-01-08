@@ -26,8 +26,9 @@ public class GoodsReceipt implements Serializable {
 
     private String note;
 
+
     @OneToMany(mappedBy = "id.goodsReceipt")
-    private Set<ReceiptItem> items = new HashSet<>();
+    private Set<ReceiptItem> receiptItems = new HashSet<>();
 
     public GoodsReceipt() {
     }
@@ -55,12 +56,12 @@ public class GoodsReceipt implements Serializable {
         this.dateReceipt = dateReceipt;
     }
 
-    public GoodsReceiptType getGoodsReceiptType() {
-        return GoodsReceiptType.valueOf(goodsReceiptType);
+    public Integer getGoodsReceiptType() {
+        return goodsReceiptType;
     }
 
-    public void setGoodsReceiptType(GoodsReceiptType goodsReceiptType) {
-        this.goodsReceiptType = goodsReceiptType.getCode();
+    public void setGoodsReceiptType(Integer goodsReceiptType) {
+        this.goodsReceiptType = goodsReceiptType;
     }
 
     public String getNote() {
@@ -71,12 +72,12 @@ public class GoodsReceipt implements Serializable {
         this.note = note;
     }
 
-    public Set<ReceiptItem> getItems() {
-        return items;
+    public Set<ReceiptItem> getReceiptItems() {
+        return receiptItems;
     }
 
-    public void setItems(Set<ReceiptItem> items) {
-        this.items = items;
+    public void setReceiptItems(Set<ReceiptItem> receiptItems) {
+        this.receiptItems = receiptItems;
     }
 
     @Override

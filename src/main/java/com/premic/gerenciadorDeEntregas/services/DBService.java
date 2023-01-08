@@ -46,11 +46,11 @@ public class DBService {
         Product p04 = new Product(null, "ESTACA CONC ARM PVT 330CM", "PÇ");
         Product p05 = new Product(null, "ESTACA CONC ARM RQ 250CM", "PÇ");
         Product p06 = new Product(null, "PLACA CONC ARM ESPESSURA: 8CM", "M2");
-      //  productRepository.saveAll(Arrays.asList(p01, p02, p03, p04, p05, p06));
+        productRepository.saveAll(Arrays.asList(p01, p02, p03, p04, p05, p06));
 
         GoodsReceipt gr01 = new GoodsReceipt(null, Instant.parse("2017-09-30T10:32:00Z"), GoodsReceiptType.MANUFACTURING, "");
         GoodsReceipt gr02 = new GoodsReceipt(null, Instant.parse("2017-10-10T19:35:00Z"), GoodsReceiptType.ACQUISITION, "");
-       // goodsReceiptRepository.saveAll(Arrays.asList(gr01, gr02));
+        // goodsReceiptRepository.saveAll(Arrays.asList(gr01, gr02));
 
         ReceiptItem ri01 = new ReceiptItem(gr01, p01, 10.0);
         ReceiptItem ri02 = new ReceiptItem(gr01, p04, 20.0);
@@ -59,8 +59,8 @@ public class DBService {
         ReceiptItem ri05 = new ReceiptItem(gr02, p02, 100.0);
         ReceiptItem ri06 = new ReceiptItem(gr02, p03, 200.0);
 
-        gr01.getItems().addAll(Arrays.asList(ri01, ri02, ri03, ri04));
-        gr02.getItems().addAll(Arrays.asList(ri05, ri06));
+        gr01.getReceiptItems().addAll(Arrays.asList(ri01, ri02, ri03, ri04));
+        gr02.getReceiptItems().addAll(Arrays.asList(ri05, ri06));
 
         p01.getItems().add(ri01);
         p02.getItems().add(ri05);
@@ -69,7 +69,7 @@ public class DBService {
         p05.getItems().add(ri03);
         p06.getItems().add(ri04);
 
-        productRepository.saveAll(Arrays.asList(p01, p02, p03, p04, p05, p06));
+        // productRepository.saveAll(Arrays.asList(p01, p02, p03, p04, p05, p06));
         goodsReceiptRepository.saveAll(Arrays.asList(gr01, gr02));
         receiptItemRepository.saveAll(Arrays.asList(ri01, ri02, ri03, ri04, ri05, ri06));
 

@@ -84,7 +84,7 @@ public class CustomerService {
         return new Customer(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 
-    public Customer fromDto(CustomerNewDTO objDto){
+    public Customer fromDto(CustomerNewDTO objDto) {
         Customer customer = new Customer(null, objDto.getName(), objDto.getEmail());
         Address address = new Address(null, objDto.getStreet(), objDto.getNumber(), objDto.getComplement(), objDto.getDistrict(), objDto.getZipCode(), objDto.getCity(), objDto.getState(), customer);
         customer.getAddresses().add(address);

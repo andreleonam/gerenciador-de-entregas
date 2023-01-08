@@ -1,5 +1,7 @@
 package com.premic.gerenciadorDeEntregas.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -25,6 +27,10 @@ public class Customer implements Serializable {
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Address> addresses = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer")
+    private Set<Order> orders = new HashSet<>();
 
     public Customer() {
     }
@@ -65,6 +71,10 @@ public class Customer implements Serializable {
 
     public Set<Address> getAddresses() {
         return addresses;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
     }
 
     @Override
