@@ -1,7 +1,6 @@
 package com.premic.gerenciadorDeEntregas.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.premic.gerenciadorDeEntregas.entities.enums.OrderStatus;
 import com.premic.gerenciadorDeEntregas.entities.enums.ShippingType;
 
@@ -42,7 +41,6 @@ public class Order implements Serializable {
     @JoinColumn(name = "deliveryAddress_id")
     private Address deliveryAddress;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> orderItems = new HashSet<>();
 
@@ -134,10 +132,6 @@ public class Order implements Serializable {
     public void setOrderItems(Set<OrderItem> orderItems) {
         this.orderItems = orderItems;
     }
-
-  /*  public Set<Delivery> getDeliveries() {
-        return deliveries;
-    }*/
 
     @Override
     public boolean equals(Object o) {

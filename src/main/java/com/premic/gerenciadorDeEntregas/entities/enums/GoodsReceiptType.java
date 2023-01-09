@@ -2,9 +2,9 @@ package com.premic.gerenciadorDeEntregas.entities.enums;
 
 public enum GoodsReceiptType {
 
-    ACQUISITION(1, "ACQUISITION"),
-    MANUFACTURING(2, "MANUFACTURING"),
-    GOODS_RETURN(3, "GOODS RETURN");
+    ACQUISITION(0, "ACQUISITION"),
+    MANUFACTURING(1, "MANUFACTURING"),
+    GOODS_RETURN(2, "GOODS RETURN");
 
     private Integer code;
     private String description;

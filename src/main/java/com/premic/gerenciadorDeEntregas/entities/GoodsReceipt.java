@@ -26,7 +26,6 @@ public class GoodsReceipt implements Serializable {
 
     private String note;
 
-
     @OneToMany(mappedBy = "id.goodsReceipt")
     private Set<ReceiptItem> receiptItems = new HashSet<>();
 
@@ -56,12 +55,12 @@ public class GoodsReceipt implements Serializable {
         this.dateReceipt = dateReceipt;
     }
 
-    public Integer getGoodsReceiptType() {
-        return goodsReceiptType;
+    public GoodsReceiptType getGoodsReceiptType() {
+        return GoodsReceiptType.valueOf(goodsReceiptType);
     }
 
-    public void setGoodsReceiptType(Integer goodsReceiptType) {
-        this.goodsReceiptType = goodsReceiptType;
+    public void setGoodsReceiptType(GoodsReceiptType goodsReceiptType) {
+        this.goodsReceiptType = goodsReceiptType.getCode();
     }
 
     public String getNote() {

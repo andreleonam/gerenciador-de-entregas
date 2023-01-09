@@ -2,8 +2,8 @@ package com.premic.gerenciadorDeEntregas.entities.enums;
 
 public enum ShippingType {
 
-    CIF(1, "CIF"),
-    FOB(2, "FOB");
+    CIF(0, "CIF"),
+    FOB(1, "FOB");
 
     private Integer code;
     private String description;

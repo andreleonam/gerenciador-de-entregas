@@ -23,11 +23,12 @@ public class Product implements Serializable {
 
     @JsonIgnore
     @OneToMany(mappedBy = "id.product")
-    private Set<ReceiptItem> items = new HashSet<>();
+    private Set<OrderItem> orderItems = new HashSet<>();
 
-   /* @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "id.product")
-    private Set<OrderItem> orderItems = new HashSet<>();*/
+    private Set<ReceiptItem> receiptItems = new HashSet<>();
+
 
     public Product() {
     }
@@ -62,21 +63,29 @@ public class Product implements Serializable {
         this.unit = unit;
     }
 
-    public Set<ReceiptItem> getItems() {
-        return items;
+    public Set<ReceiptItem> getReceiptItems() {
+        return receiptItems;
+    }
+
+    public void setReceiptItems(Set<ReceiptItem> receiptItems) {
+        this.receiptItems = receiptItems;
     }
 
     @JsonIgnore
     public Set<GoodsReceipt> getGoodsReceipt() {
         Set<GoodsReceipt> set = new HashSet<>();
-        for (ReceiptItem obj : items) {
+        for (ReceiptItem obj : receiptItems) {
             set.add((obj.getGoodsReceipt()));
         }
         return set;
     }
-/*
+
     public Set<OrderItem> getOrderItems() {
         return orderItems;
+    }
+
+    public void setOrderItems(Set<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
     @JsonIgnore
@@ -86,7 +95,7 @@ public class Product implements Serializable {
             set.add((obj.getOrder()));
         }
         return set;
-    }*/
+    }
 
     @Override
     public boolean equals(Object o) {

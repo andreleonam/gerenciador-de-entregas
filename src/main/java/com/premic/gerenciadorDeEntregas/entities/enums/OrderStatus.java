@@ -2,9 +2,9 @@ package com.premic.gerenciadorDeEntregas.entities.enums;
 
 public enum OrderStatus {
 
-    PENDING(1, "PENDING"),
-    DELIVERED(2, "DELIVERED"),
-    CANCELED(3, "CANCELED");
+    PENDING(0, "PENDING"),
+    DELIVERED(1, "DELIVERED"),
+    CANCELED(2, "CANCELED");
 
     private Integer code;
     private String description;

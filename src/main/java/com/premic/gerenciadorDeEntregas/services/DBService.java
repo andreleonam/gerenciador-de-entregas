@@ -2,6 +2,8 @@ package com.premic.gerenciadorDeEntregas.services;
 
 import com.premic.gerenciadorDeEntregas.entities.*;
 import com.premic.gerenciadorDeEntregas.entities.enums.GoodsReceiptType;
+import com.premic.gerenciadorDeEntregas.entities.enums.OrderStatus;
+import com.premic.gerenciadorDeEntregas.entities.enums.ShippingType;
 import com.premic.gerenciadorDeEntregas.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,12 @@ public class DBService {
 
     @Autowired
     ReceiptItemRepository receiptItemRepository;
+
+    @Autowired
+    OrderItemRepository orderItemRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
 
 
     public void instantiateTestDatabase() {
@@ -62,16 +70,34 @@ public class DBService {
         gr01.getReceiptItems().addAll(Arrays.asList(ri01, ri02, ri03, ri04));
         gr02.getReceiptItems().addAll(Arrays.asList(ri05, ri06));
 
-        p01.getItems().add(ri01);
-        p02.getItems().add(ri05);
-        p03.getItems().add(ri06);
-        p04.getItems().add(ri02);
-        p05.getItems().add(ri03);
-        p06.getItems().add(ri04);
+        p01.getReceiptItems().add(ri01);
+        p02.getReceiptItems().add(ri05);
+        p03.getReceiptItems().add(ri06);
+        p04.getReceiptItems().add(ri02);
+        p05.getReceiptItems().add(ri03);
+        p06.getReceiptItems().add(ri04);
 
-        // productRepository.saveAll(Arrays.asList(p01, p02, p03, p04, p05, p06));
         goodsReceiptRepository.saveAll(Arrays.asList(gr01, gr02));
         receiptItemRepository.saveAll(Arrays.asList(ri01, ri02, ri03, ri04, ri05, ri06));
 
+        Order order01 = new Order(null, Instant.now(), Instant.parse("2023-01-20T06:00:00Z"), ShippingType.CIF, OrderStatus.PENDING, "entregar em horario comercial", customer01, address01);
+        Order order02 = new Order(null, Instant.now(), Instant.parse("2023-01-25T06:00:00Z"), ShippingType.FOB, OrderStatus.PENDING, null, customer01, address02);
+
+        OrderItem oi01 = new OrderItem(order01, p01, 10.0);
+        OrderItem oi02 = new OrderItem(order01, p04, 20.0);
+        OrderItem oi03 = new OrderItem(order01, p05, 30.0);
+        OrderItem oi04 = new OrderItem(order01, p06, 40.0);
+        OrderItem oi05 = new OrderItem(order02, p02, 100.0);
+        OrderItem oi06 = new OrderItem(order02, p03, 200.0);
+
+        p01.getOrderItems().add(oi01);
+        p02.getOrderItems().add(oi05);
+        p03.getOrderItems().add(oi06);
+        p04.getOrderItems().add(oi02);
+        p05.getOrderItems().add(oi03);
+        p06.getOrderItems().add(oi04);
+
+        orderRepository.saveAll(Arrays.asList(order01, order02));
+        orderItemRepository.saveAll(Arrays.asList(oi01, oi02, oi03, oi04, oi05, oi06));
     }
 }
